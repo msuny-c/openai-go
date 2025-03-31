@@ -1,6 +1,6 @@
 # OpenAI Go API Library
 
-<a href="https://pkg.go.dev/github.com/openai/openai-go"><img src="https://pkg.go.dev/badge/github.com/openai/openai-go.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/msuny-c/openai-go"><img src="https://pkg.go.dev/badge/github.com/msuny-c/openai-go.svg" alt="Go Reference"></a>
 
 The OpenAI Go library provides convenient access to [the OpenAI REST
 API](https://platform.openai.com/docs) from applications written in Go. The full API of this library can be found in [api.md](api.md).
@@ -15,7 +15,7 @@ API](https://platform.openai.com/docs) from applications written in Go. The full
 
 ```go
 import (
-	"github.com/openai/openai-go" // imported as openai
+	"github.com/msuny-c/openai-go" // imported as openai
 )
 ```
 
@@ -26,7 +26,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/openai/openai-go@v0.1.0-beta.3'
+go get -u 'github.com/msuny-c/openai-go@v0.1.0-beta.3'
 ```
 
 <!-- x-release-please-end -->
@@ -46,9 +46,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/openai/openai-go"
-	"github.com/openai/openai-go/option"
-	"github.com/openai/openai-go/shared"
+	"github.com/msuny-c/openai-go"
+	"github.com/msuny-c/openai-go/option"
+	"github.com/msuny-c/openai-go/shared"
 )
 
 func main() {
@@ -476,7 +476,7 @@ client.Chat.Completions.New(context.TODO(), ...,
 )
 ```
 
-See the [full list of request options](https://pkg.go.dev/github.com/openai/openai-go/option).
+See the [full list of request options](https://pkg.go.dev/github.com/msuny-c/openai-go/option).
 
 ### Pagination
 
@@ -763,8 +763,8 @@ package main
 
 import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
-	"github.com/openai/openai-go"
-	"github.com/openai/openai-go/azure"
+	"github.com/msuny-c/openai-go"
+	"github.com/msuny-c/openai-go/azure"
 )
 
 func main() {
@@ -801,7 +801,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/openai/openai-go/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/msuny-c/openai-go/issues) with questions, bugs, or suggestions.
 
 ## Contributing
 
