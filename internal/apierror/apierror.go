@@ -5,7 +5,8 @@ package apierror
 import (
 	"fmt"
 	"net/http"
-	"net/http/httputil"
+
+	// Removing httputil import as it's not supported by TinyGo
 
 	"github.com/openai/openai-go/internal/apijson"
 	"github.com/openai/openai-go/packages/resp"
@@ -45,15 +46,42 @@ func (r *Error) Error() string {
 	return fmt.Sprintf("%s %q: %d %s %s", r.Request.Method, r.Request.URL, r.Response.StatusCode, http.StatusText(r.Response.StatusCode), r.JSON.raw)
 }
 
+// TinyGo-compatible version that doesn't use httputil
 func (r *Error) DumpRequest(body bool) []byte {
-	if r.Request.GetBody != nil {
-		r.Request.Body, _ = r.Request.GetBody()
+	if r.Request == nil {
+		return []byte("Request is nil")
 	}
-	out, _ := httputil.DumpRequestOut(r.Request, body)
-	return out
+
+	var result string
+	result = fmt.Sprintf("%s %s HTTP/%d.%d\r\n", r.Request.Method, r.Request.URL.Path, r.Request.ProtoMajor, r.Request.ProtoMinor)
+
+	// Add headers
+	for key, values := range r.Request.Header {
+		for _, value := range values {
+			result += fmt.Sprintf("%s: %s\r\n", key, value)
+		}
+	}
+
+	// We're not including body content as it would require more complex handling
+	return []byte(result)
 }
 
+// TinyGo-compatible version that doesn't use httputil
 func (r *Error) DumpResponse(body bool) []byte {
-	out, _ := httputil.DumpResponse(r.Response, body)
-	return out
+	if r.Response == nil {
+		return []byte("Response is nil")
+	}
+
+	var result string
+	result = fmt.Sprintf("HTTP/%d.%d %d %s\r\n", r.Response.ProtoMajor, r.Response.ProtoMinor, r.Response.StatusCode, r.Response.Status)
+
+	// Add headers
+	for key, values := range r.Response.Header {
+		for _, value := range values {
+			result += fmt.Sprintf("%s: %s\r\n", key, value)
+		}
+	}
+
+	// We're not including body content as it would require more complex handling
+	return []byte(result)
 }
